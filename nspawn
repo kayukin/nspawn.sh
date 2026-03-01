@@ -8,7 +8,7 @@
 # container using namespaces, bind mounts, and pivot_root.
 #
 # No daemons. No D-Bus. No dependencies beyond a POSIX shell,
-# a few coreutils or busybox, and a kernel >= 4.19.
+# a few coreutils or busybox, and a kernel >= 4.14.
 #
 # Why?
 #
@@ -32,7 +32,7 @@
 # Running a real Linux userspace on these devices isn't a hack,
 # it's the sane thing to do.
 #
-# If your rooted phone has a kernel that supports namespaces (4.19+),
+# If your rooted phone has a kernel that supports namespaces (4.14+),
 # this script will run a full Linux userspace on it -- Debian, Arch,
 # Alpine, whatever you need, the companion getroot tool has you covered.
 #
@@ -586,8 +586,8 @@ shift
 kernel_version=$(uname -r)
 major=$(echo "$kernel_version" | cut -d. -f1)
 minor=$(echo "$kernel_version" | cut -d. -f2)
-if [ "$major" -lt 4 ] || { [ "$major" -eq 4 ] && [ "$minor" -lt 19 ]; }; then
-    die "Kernel version must be >= 4.19"
+if [ "$major" -lt 4 ] || { [ "$major" -eq 4 ] && [ "$minor" -lt 14 ]; }; then
+    die "Kernel version must be >= 4.14"
 fi
 
 ROOTFS=$(cd "$ROOTFS" && pwd -P)
